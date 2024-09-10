@@ -1,0 +1,3 @@
+requests
+linkedin-api  # https://github.com/tomquirk/linkedin-api
+python-dotenv
