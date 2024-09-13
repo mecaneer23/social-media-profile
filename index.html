@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile</title>
+</head>
+
+<body>
+    <form action="javascript:createCard()">
+        <input type="text" id="name">
+        <input type="submit">
+    </form>
+    <div class="card">
+        <img id="picture">
+    </div>
+    <script>
+        async function createCard() {
+            const name = document.getElementById("name").value;
+            document.title = `${name}'s GitHub Profile`;
+            const imageUrl = `https://avatars.githubusercontent.com/${name}`;
+            document.getElementById("picture").src = await fetch(imageUrl)
+                .then(response => response.blob())
+                .then(blob => URL.createObjectURL(blob));
+        }
+    </script>
+</body>
+
+</html>
