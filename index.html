@@ -12,17 +12,45 @@
         <input type="text" id="name">
         <input type="submit">
     </form>
-    <div class="card">
-        <img id="picture">
-    </div>
     <script>
-        async function createCard() {
-            const name = document.getElementById("name").value;
-            document.title = `${name}'s GitHub Profile`;
+        async function getPicture(name) {
             const imageUrl = `https://avatars.githubusercontent.com/${name}`;
-            document.getElementById("picture").src = await fetch(imageUrl)
+            const picture = document.createElement("img");
+            picture.src = await fetch(imageUrl)
                 .then(response => response.blob())
                 .then(blob => URL.createObjectURL(blob));
+            return picture;
+        }
+
+        async function getInfo(name) {
+            const info = await fetch(`https://api.github.com/users/${name}`)
+                .then(response => response.json())
+            const div = document.createElement("div");
+            const username = document.createElement("h1");
+            username.innerHTML = info.name;
+            const link = document.createElement("a");
+            link.href = info.html_url;
+            const handle = document.createElement("h3");
+            handle.innerHTML = "@" + info.login;
+            link.appendChild(handle);
+            const bio = document.createElement("p");
+            bio.innerHTML = info.bio;
+            div.appendChild(username);
+            div.appendChild(link);
+            div.appendChild(bio);
+            return div;
+        }
+
+        async function createCard() {
+            const name = document.getElementById("name").value;
+            // TODO: remove form from body
+            const card = document.createElement("div");
+            card.classList.add("card");
+            document.title = `${name}'s GitHub Profile`;
+            card.appendChild(await getPicture(name));
+            card.appendChild(await getInfo(name));
+            document.body.appendChild(card);
+            // TODO: add css
         }
     </script>
 </body>
