@@ -14,11 +14,8 @@
     </form>
     <script>
         async function getPicture(name) {
-            const imageUrl = `https://avatars.githubusercontent.com/${name}`;
             const picture = document.createElement("img");
-            picture.src = await fetch(imageUrl)
-                .then(response => response.blob())
-                .then(blob => URL.createObjectURL(blob));
+            picture.src = `https://avatars.githubusercontent.com/${name}`;
             return picture;
         }
 
@@ -43,7 +40,7 @@
 
         async function createCard() {
             const name = document.getElementById("name").value;
-            // TODO: remove form from body
+            document.body.removeChild(document.querySelector("form"));
             const card = document.createElement("div");
             card.classList.add("card");
             document.title = `${name}'s GitHub Profile`;
