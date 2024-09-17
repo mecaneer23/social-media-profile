@@ -71,4 +71,47 @@ input {
     width: fit-content;
 }
 
-/* TODO: feat: add card styling */
+.card {
+    background-color: white;
+    margin: 2vh;
+    padding: 2vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 3vh;
+    width: min-content;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+}
+
+.card img {
+    box-sizing: border-box;
+    border-radius: 1vh;
+    width: 25vw;
+}
+
+.card a {
+    text-decoration: none;
+}
+
+.card h1 {
+    margin-bottom: 1vh;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    background-color: transparent;
+    font-weight: thin;
+    text-wrap: wrap;
+}
+
+
+@media (max-width: 850px) {
+    .card img {
+        width: 60vw;
+        height: auto;
+    }
+}
